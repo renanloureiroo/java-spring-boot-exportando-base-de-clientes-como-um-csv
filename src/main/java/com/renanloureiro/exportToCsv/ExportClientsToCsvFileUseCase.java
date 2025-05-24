@@ -3,13 +3,13 @@ package com.renanloureiro.exportToCsv;
 import com.opencsv.CSVWriter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+
 
 import java.io.*;
 import java.sql.SQLException;
@@ -18,15 +18,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 @Service
-@RequiredArgsConstructor
 public class ExportClientsToCsvFileUseCase {
-    private final ClientRepository clientRepository;
-    private static final String TEMP_DIR = "/app/temp";
-    private static final int FETCH_SIZE = 1000;
-    private static final Logger logger = LoggerFactory.getLogger(ExportClientsToCsvFileUseCase.class);
+    @Autowired
+    private ClientRepository clientRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private static final String TEMP_DIR = "/app/temp";
+    private static final int FETCH_SIZE = 1000;
+    private static final Logger logger = LoggerFactory.getLogger(ExportClientsToCsvFileUseCase.class);
 
     @Transactional(readOnly = true)
     public InputStream exportToCsvAsInputStream() throws IOException {

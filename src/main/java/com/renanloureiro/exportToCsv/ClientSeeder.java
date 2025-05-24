@@ -11,8 +11,10 @@ import java.util.List;
 
 @Component
 public class ClientSeeder implements CommandLineRunner {
+    
     @Autowired
     private ClientRepository clientRepository;
+
     private static final int TOTAL_CLIENTS = 1_000_000;
     private static final int BATCH_SIZE = 10_000;
     private static final Logger logger = LoggerFactory.getLogger(ClientSeeder.class);
