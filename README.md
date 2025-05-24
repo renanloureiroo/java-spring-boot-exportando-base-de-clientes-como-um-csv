@@ -21,7 +21,7 @@ Este projeto exporta uma base de clientes do banco PostgreSQL para um arquivo CS
 3. **No terminal, execute o comando abaixo para subir a aplicação e o banco:**
 
    ```sh
-   docker-compose up --build
+   docker compose up --build
    ```
 
    Isso irá:
@@ -54,11 +54,11 @@ Este projeto exporta uma base de clientes do banco PostgreSQL para um arquivo CS
 
 - Para parar e remover os containers:
   ```sh
-  docker-compose down
+  docker compose down
   ```
 - Para remover volumes e dados do banco:
   ```sh
-  docker-compose down -v
+  docker compose down -v
   ```
 
 ---
