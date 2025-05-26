@@ -62,13 +62,18 @@ public class ExportClientsToCsvFileUseCase {
             csvWriter.writeNext(new String[]{"id", "name", "email"}, false);
             setFetchSize(FETCH_SIZE);
             try (Stream<Client> clientStream = clientRepository.streamAll()) {
-                clientStream.forEach(client ->
-                        csvWriter.writeNext(new String[]{
-                                String.valueOf(client.getId()),
-                                client.getName(),
-                                client.getEmail()
-                        }, false)
-                );
+                clientStream.forEach(client -> {
+                    csvWriter.writeNext(new String[]{
+                            String.valueOf(client.getId()),
+                            client.getName(),
+                            client.getEmail()
+                    }, false);
+                    try {
+                        writer.flush();
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                });
             }
         }
     }
