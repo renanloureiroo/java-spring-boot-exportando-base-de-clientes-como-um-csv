@@ -16,8 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/clients")
@@ -60,7 +58,6 @@ public class ClientController {
     }
 
     private String generateFileName(String suffix) {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        return "export-clients-" + timestamp + suffix + ".csv";
+        return "export-clients-" + suffix + ".csv";
     }
 } 

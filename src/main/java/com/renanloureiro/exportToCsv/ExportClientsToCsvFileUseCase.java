@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 @Service
@@ -88,7 +86,7 @@ public class ExportClientsToCsvFileUseCase {
     }
 
     private String getFilePath() {
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        String timestamp = String.valueOf(java.time.Instant.now().toEpochMilli());
         String directory = getDirectory();
         return directory + "/export-clients-" + timestamp + ".csv";
     }
